@@ -1,5 +1,6 @@
 
 import 'package:besquare_mobile_project/CreatePost.dart';
+import 'package:besquare_mobile_project/ViewPost.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 // import 'package:project/CreatePost.dart';
@@ -28,9 +29,9 @@ class _PostPageState extends State<PostPage> {
     widget.channel.sink.add('{"type": "get_posts"}');
   }
 
-  void _deletePost() {
-    widget.channel.sink.add('{"type": "delete_post"}');
-  }
+  // void _deletePost() {
+  //   widget.channel.sink.add('{"type": "delete_post"}');
+  // }
 
   @override
   void dispose() {
@@ -49,7 +50,6 @@ class _PostPageState extends State<PostPage> {
       decodedPost = jsonDecode(results);
       if (decodedPost['type'] == 'all_posts') {
         ListPost = decodedPost['data']['posts'];
-        //print(ListPost);
       }
       setState(() {});
     });
@@ -116,7 +116,17 @@ class _PostPageState extends State<PostPage> {
         itemCount: ListPost.length,
         itemBuilder: (context, index) {
           bool isSaved = savedPost.contains(ListPost[index]);
-          return Card(
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+              context,
+                MaterialPageRoute(
+                builder: (context) =>
+                      ViewPostRoute(DetailPost: ListPost[index]),
+                ), 
+                );
+                },
+            child: Card(
               child: Padding(
                 padding: const EdgeInsets.all(10),
                 child: Column(
@@ -191,9 +201,9 @@ class _PostPageState extends State<PostPage> {
                   ],
                 ),
               ),
-            
+          ),
           );
-          //END CARD
+            //END CARD
         },
       ),
       ),
