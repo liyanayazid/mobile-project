@@ -1,111 +1,84 @@
+// ignore_for_file: non_constant_identifier_names
+import 'package:flutter/material.dart';
 
-// import 'dart:convert';
-// import 'package:flutter/cupertino.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart' as rootBundle;
-// import 'package:web_socket_channel/web_socket_channel.dart';
+// ignore: must_be_immutable
+class DisplayPostRoute extends StatefulWidget {
+  //  prefer_typing_uninitialized_variables
+  // ignore: prefer_typing_uninitialized_variables
+  final DetailPost;
 
+  // ignore: prefer_const_constructors_in_immutables, duplicate_ignore
+  DisplayPostRoute(
+      {
+      Key? key,
+      required this.DetailPost,
+})
+      : super(key: key);
 
+  @override
+  _DisplayPostRouteState createState() => _DisplayPostRouteState();
+}
 
-// // ignore: must_be_immutable
-// class ViewPost extends StatefulWidget {
+class _DisplayPostRouteState extends State<DisplayPostRoute> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.blueGrey,
+        title: Text(widget.DetailPost['title']),
+      ),
+      body: SafeArea(
+        child: Align(
+          alignment: Alignment.center,
+          child: Column(
+            children: [
 
-//   @override
-//     _ViewPostState createState() => _ViewPostState();
-// }
+               //post image
+              // ignore: avoid_unnecessary_containers
+          Padding(
+            padding: const EdgeInsets.only(top: 30),
+            child:           SizedBox(
+            width: 200,
+            height: 200,
+            child:ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: Image.network("${widget.DetailPost["image"]}",
+                    errorBuilder: (_1, _2, _3) {
+                  return const SizedBox.shrink();
+                }, 
+                fit: BoxFit.fill),
+              )),
+          ),),
+            
 
-// class _ViewPostState extends State<ViewPost> {
-
-
-//   @override
-//   Widget build(BuildContext context) {
-//         return Scaffold(
-//         resizeToAvoidBottomInset: false,
-//         appBar: AppBar(
-//           backgroundColor: Color.fromRGBO(143, 148, 251, 1),
-//           title: Text('Hello???'),
-//         ),
-
-//         //BODY
-//         body: ListView.builder(
-//           itemCount: messageList.length,
-//           itemBuilder: (context, index) {
-           
-//             return Card(
-//               elevation: 5,
-//               margin: EdgeInsets.symmetric(horizontal: 15, vertical: 7),
-//               child: Row(
-//                 mainAxisAlignment: MainAxisAlignment.center,
-//                 crossAxisAlignment: CrossAxisAlignment.center,
-//                 children: [
-//                   Expanded(
-//                     child: Container(
-//                       padding: EdgeInsets.only(bottom: 8),
-//                       child: Column(
-//                         mainAxisAlignment: MainAxisAlignment.center,
-//                         crossAxisAlignment: CrossAxisAlignment.start,
-//                         children: [
-//                           //start
-//                           Padding(
-//                             padding: EdgeInsets.only(
-//                                 left: 20, right: 8, bottom: 15, top: 15),
-//                             child: Row(children: [
-//                               Text(
-//                                 messageList[index]["author"],
-//                                 style: TextStyle(
-//                                     fontSize: 16,
-//                                     fontWeight: FontWeight.bold,
-//                                     color: Colors.deepPurple),
-//                               ),
-//                               Expanded(
-//                                 child: Container(
-//                                   padding: EdgeInsets.only(left: 290),
-//                                   child: Text(
-//                                     messageList[index]["date"],
-//                                     style: TextStyle(
-//                                       fontSize: 13,
-//                                       color: Colors.blueGrey,
-//                                     ),
-//                                   ),
-//                                 ),
-//                               ),
-//                             ]),
-//                           ),
-//                           Container(
-//                             padding: EdgeInsets.only(left: 10),
-//                             child: Image(
-//                               image: NetworkImage(
-//                                   '${messageList[index]["image"]}'),
-//                             ),
-//                           ),
-
-//                           Padding(
-//                             padding:
-//                                 EdgeInsets.only(left: 20, right: 8, top: 15),
-//                             child: Text(
-//                               messageList[index]['description'],
-//                                style: TextStyle(
-//                                   fontSize: 16, fontWeight: FontWeight.bold),
-//                             ),
-//                           ),
-//                           Padding(
-//                             padding:
-//                                 EdgeInsets.only(left: 410, top: 3, bottom: 5),
-//                             child: IconButton(
-//                               icon: Icon(Icons.favorite_border),
-//                               iconSize: 30,
-//                               onPressed: null,
-//                             ),
-//                           ),
-//                         ],
-//                       ),
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//             );
-//           },
-//         )
-//         );
-//   }
-// }
+              //display detail
+              // ignore: avoid_unnecessary_containers
+              Container(
+                child:Padding(
+                padding: const EdgeInsets.only(top: 10,left: 10),
+                child: Column(
+                  children: <Widget>[
+                    Text('${widget.DetailPost['title']}',
+                    style: const TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.blueGrey)),
+                    Text('${widget.DetailPost['author']}',
+                    style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold,color: Colors.blueGrey),),
+                    Text('${widget.DetailPost['description']}',
+                    style: const TextStyle(fontSize: 17)),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 14),
+                      child:     Text('${widget.DetailPost['date']}',
+                    style: const TextStyle(fontSize: 15,)),
+                    )
+                    
+                  ],
+                ),
+              ),
+              )
+            ],
+          ),),
+      ),
+    );
+  }
+}

@@ -9,7 +9,6 @@ import 'package:web_socket_channel/io.dart';
 // ignore: unused_import 
 import 'package:web_socket_channel/status.dart' as status;
 import 'package:web_socket_channel/web_socket_channel.dart';
-import 'package:besquare_mobile_project/CreatePost.dart';
 
 // ignore: must_be_immutable
 class PostPage extends StatefulWidget {
@@ -92,7 +91,7 @@ class _PostPageState extends State<PostPage> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    CreatePost()),
+                                    CreatePost(channel: channel,)),
                                    
                                     
                           );
