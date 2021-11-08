@@ -1,6 +1,6 @@
-# besquare_mobile_project
+# BeSquare Mobile Project
 
-A new Flutter project.
+URL: ws://besquare-demo.herokuapp.com
 
 ## Getting Started
 
